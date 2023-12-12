@@ -1,0 +1,33 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.2.0 https://maven.apache.org/xsd/assembly-2.2.0.xsd">
+    <id>nuxeo-distribution</id>
+
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+
+    <dependencySets>
+        <dependencySet>
+            <includes>
+                <include>${project.groupId}:triskell-nuxeo-extensions:jar:${project.version}</include>
+            </includes>
+            <outputDirectory>${artifactId}-${project.version}/nxserver/plugins</outputDirectory>
+            <scope>runtime</scope>
+            <unpack>false</unpack>
+            <useProjectArtifact>false</useProjectArtifact>
+        </dependencySet>
+    </dependencySets>
+
+
+    <fileSets>
+        <fileSet>
+            <directory>${project.build.directory}/nuxeo-server-tomcat-${nuxeo.version}</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+            <outputDirectory>${artifactId}-${project.version}</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>

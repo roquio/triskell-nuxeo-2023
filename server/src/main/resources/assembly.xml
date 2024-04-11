@@ -29,5 +29,15 @@
             </includes>
             <outputDirectory>${artifactId}-${project.version}</outputDirectory>
         </fileSet>
+
+        <!-- Templates -->
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <outputDirectory>/${artifactId}-${project.version}</outputDirectory>
+
+        </fileSet>
     </fileSets>
+
+
+
 </assembly>

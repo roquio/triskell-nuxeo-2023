@@ -1,0 +1,2 @@
+nuxeo.template.includes=postgresql
+triskell.target=.

@@ -3,6 +3,6 @@
     <require>org.nuxeo.ecm.core.schema.TypeService</require>
 
     <extension target="org.nuxeo.ecm.core.schema.TypeService" point="schema">
-        <schema name="triskell" prefix="tsk" src="schema/triskell.xsd"/>
+        <schema name="triskell" prefix="tk" src="schema/triskell.xsd"/>
     </extension>
 </component>

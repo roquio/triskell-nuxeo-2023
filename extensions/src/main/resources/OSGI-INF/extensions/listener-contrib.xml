@@ -1,21 +1,15 @@
 <?xml version="1.0"?>
-
-<component name="triskell.listener">
-
+<component name="io.roqu.triskell.listener">
     <require>org.nuxeo.ecm.core.event.EventServiceComponent</require>
 
     <extension target="org.nuxeo.ecm.core.event.EventServiceComponent"
                point="listener">
-
         <listener name="uniqueIdListener" async="false"
                   postCommit="false"
                   enabled="true"
-                  class="io.roqu.listener.UniqueIdListener"
+                  class="io.roqu.triskell.listener.UniqueIdListener"
                   priority="1">
             <event>aboutToCreate</event>
         </listener>
-
     </extension>
-
-
 </component>

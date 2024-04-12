@@ -1,4 +1,4 @@
-package io.roqu.listener;
+package io.roqu.triskell.listener;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.nuxeo.ecm.core.api.DocumentModel;
@@ -17,8 +17,7 @@ public class UniqueIdListener implements EventListener {
     @Override
     public void handleEvent(Event event) {
 
-        if(event.getContext() instanceof DocumentEventContext) {
-            DocumentEventContext docCtx = (DocumentEventContext) event.getContext();
+        if(event.getContext() instanceof DocumentEventContext docCtx) {
             DocumentModel sourceDocument = docCtx.getSourceDocument();
             if(sourceDocument.hasSchema("triskell")) {
 

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<component name="fr.toutatice.triskell.nuxeo.extensions.operations" version="1.0">
+    <require>org.nuxeo.ecm.core.operation.OperationServiceComponent</require>
+
+    <extension target="org.nuxeo.ecm.core.operation.OperationServiceComponent" point="operations">
+        <operation class="io.roqu.triskell.elasticsearch.operations.ElasticSearchQuery"/>
+    </extension>
+</component>

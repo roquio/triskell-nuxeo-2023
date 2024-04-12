@@ -3,4 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Triskell Nuxeo extensions
 Bundle-SymbolicName: fr.toutatice.triskell.nuxeo.extensions;singleton:=true
 Nuxeo-Component: OSGI-INF/extensions/doctype-contrib.xml,
-  OSGI-INF/extensions/schema-contrib.xml
+  OSGI-INF/extensions/schema-contrib.xml,
+  OSGI-INF/extensions/listener-contrib.xml
+

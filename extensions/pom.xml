@@ -43,6 +43,11 @@
             <artifactId>nuxeo-elasticsearch-core</artifactId>
             <version>${nuxeo.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.nuxeo.ecm.platform</groupId>
+            <artifactId>nuxeo-platform-directory-sql</artifactId>
+            <version>${nuxeo.version}</version>
+        </dependency>
 
         <!--Project Lombok-->
         <dependency>

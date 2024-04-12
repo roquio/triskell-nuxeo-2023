@@ -1,10 +1,13 @@
 package io.roqu.triskell.listener;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import io.roqu.triskell.Constants;
+import io.roqu.triskell.businessid.BusinessIdService;
 import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.event.Event;
 import org.nuxeo.ecm.core.event.EventListener;
 import org.nuxeo.ecm.core.event.impl.DocumentEventContext;
+import org.nuxeo.runtime.api.Framework;
 
 
 /**
@@ -19,25 +22,24 @@ public class UniqueIdListener implements EventListener {
 
         if(event.getContext() instanceof DocumentEventContext docCtx) {
             DocumentModel sourceDocument = docCtx.getSourceDocument();
-            if(sourceDocument.hasSchema("triskell")) {
+            if(sourceDocument.hasSchema(Constants.TK_SCHEMA)) {
 
-                String newTskId = createUID();
+                try {
+                    String newId = Framework.getService(BusinessIdService.class).getNewId();
 
-                // TODO check if not exists
+                    sourceDocument.setPropertyValue(Constants.TK_ID_FIELD, newId);
+                }
+                catch (NuxeoException e) {
+                    event.markBubbleException();
+                    throw e;
 
-                sourceDocument.setPropertyValue("tsk:id", newTskId);
+                }
+
 
             }
         }
 
     }
 
-
-
-    private String createUID() {
-
-        return RandomStringUtils.random(8, true, true);
-
-    }
 
 }

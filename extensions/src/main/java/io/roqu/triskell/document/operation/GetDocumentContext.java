@@ -13,6 +13,7 @@ import org.nuxeo.ecm.automation.core.annotations.Param;
 import org.nuxeo.ecm.core.api.*;
 import org.nuxeo.ecm.core.api.impl.blob.StringBlob;
 import org.nuxeo.ecm.core.api.security.SecurityConstants;
+import org.nuxeo.ecm.webengine.jaxrs.session.SessionFactory;
 
 /**
  * Get document context operation.
@@ -52,6 +53,12 @@ public class GetDocumentContext {
     @Param(name = "uuid", description = "Document technical identifier", required = false)
     protected String uuid;
 
+    /**
+     * Document repository name.
+     */
+    @Param(name = "repository", description = "Document repository name", required = false)
+    protected String repository;
+
 
     /**
      * Run operation.
@@ -60,6 +67,14 @@ public class GetDocumentContext {
      */
     @OperationMethod
     public Blob run() throws OperationException {
+        // Session
+        CoreSession session;
+        if (StringUtils.isEmpty(this.repository) || StringUtils.equals(this.repository, this.session.getRepositoryName())) {
+            session = this.session;
+        } else {
+            session = SessionFactory.getSession(this.repository);
+        }
+
         // Document reference
         DocumentRef documentRef;
         if (StringUtils.isEmpty(this.uuid)) {
@@ -67,7 +82,7 @@ public class GetDocumentContext {
             String path;
             if (StringUtils.isEmpty(this.path)) {
                 // Get document with unrestricted rights
-                DocumentModel unrestrictedDocument = this.getUnrestrictedDocument(this.id);
+                DocumentModel unrestrictedDocument = this.getUnrestrictedDocument(session, this.id);
                 if (unrestrictedDocument == null) {
                     throw new DocumentNotFoundException(this.id);
                 }
@@ -83,15 +98,16 @@ public class GetDocumentContext {
         }
 
         // Document
-        DocumentModel document = this.session.getDocument(documentRef);
+        DocumentModel document = session.getDocument(documentRef);
         // Related workspace
-        DocumentModel workspace = this.getRelatedWorkspace(document.getPathAsString());
+        DocumentModel workspace = this.getRelatedWorkspace(session, document.getPathAsString());
 
         // JSON object
         JSONObject jsonObject = new JSONObject();
         jsonObject.accumulate("id", document.getPropertyValue("tk:id"));
         jsonObject.accumulate("path", document.getPathAsString());
         jsonObject.accumulate("uuid", document.getId());
+        jsonObject.accumulate("repository", document.getRepositoryName());
         if (workspace != null) {
             jsonObject.accumulate("workspaceId", workspace.getPropertyValue("tk:id"));
             jsonObject.accumulate("workspacePath", workspace.getPathAsString());
@@ -104,11 +120,12 @@ public class GetDocumentContext {
     /**
      * Get unrestricted document.
      *
-     * @param id document identifier
+     * @param session session
+     * @param id      document identifier
      * @return document
      */
-    private DocumentModel getUnrestrictedDocument(String id) {
-        GetDocumentByIdUnrestrictedSessionRunner runner = new GetDocumentByIdUnrestrictedSessionRunner(this.session, id);
+    private DocumentModel getUnrestrictedDocument(CoreSession session, String id) {
+        GetDocumentByIdUnrestrictedSessionRunner runner = new GetDocumentByIdUnrestrictedSessionRunner(session, id);
         runner.runUnrestricted();
 
         return runner.getDocument();
@@ -118,18 +135,19 @@ public class GetDocumentContext {
     /**
      * Get related workspace document.
      *
-     * @param path document path
+     * @param session session
+     * @param path    document path
      * @return document
      */
-    private DocumentModel getRelatedWorkspace(String path) {
-        GetRelatedWorkspaceUnrestrictedSessionRunner runner = new GetRelatedWorkspaceUnrestrictedSessionRunner(this.session, path);
+    private DocumentModel getRelatedWorkspace(CoreSession session, String path) {
+        GetRelatedWorkspaceUnrestrictedSessionRunner runner = new GetRelatedWorkspaceUnrestrictedSessionRunner(session, path);
         runner.runUnrestricted();
 
         DocumentModel workspace;
         if (runner.getWorkspace() == null) {
             // Not found
             workspace = null;
-        } else if (this.session.hasPermission(runner.getWorkspace().getRef(), SecurityConstants.READ)) {
+        } else if (session.hasPermission(runner.getWorkspace().getRef(), SecurityConstants.READ)) {
             workspace = runner.getWorkspace();
         } else {
             // Forbidden

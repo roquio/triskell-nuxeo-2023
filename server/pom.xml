@@ -29,6 +29,12 @@
             <version>${nuxeo.version}</version>
             <type>zip</type>
         </dependency>
+
+        <dependency>
+            <groupId>org.nuxeo.ecm.platform</groupId>
+            <artifactId>nuxeo-platform-login-portal-sso</artifactId>
+            <version>${nuxeo.version}</version>
+        </dependency>
     </dependencies>
 
 

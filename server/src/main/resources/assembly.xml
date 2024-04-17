@@ -11,6 +11,17 @@
     <dependencySets>
         <dependencySet>
             <includes>
+                <include>org.nuxeo.ecm.platform:nuxeo-platform-login-portal-sso:jar:${nuxeo.version}
+                </include>
+            </includes>
+            <outputDirectory>${artifactId}-${project.version}/nxserver/bundles</outputDirectory>
+            <scope>runtime</scope>
+            <unpack>false</unpack>
+            <useProjectArtifact>false</useProjectArtifact>
+        </dependencySet>
+
+        <dependencySet>
+            <includes>
                 <include>${project.groupId}:triskell-nuxeo-extensions:jar:${project.version}</include>
             </includes>
             <outputDirectory>${artifactId}-${project.version}/nxserver/plugins</outputDirectory>
@@ -27,10 +38,14 @@
             <includes>
                 <include>**</include>
             </includes>
+            <excludes>
+                <!-- log4j -->
+                <exclude>lib/log4j2.xml</exclude>
+            </excludes>
             <outputDirectory>${artifactId}-${project.version}</outputDirectory>
         </fileSet>
 
-        <!-- Templates -->
+        <!-- Templates & log4j -->
         <fileSet>
             <directory>src/main/resources</directory>
             <outputDirectory>/${artifactId}-${project.version}</outputDirectory>

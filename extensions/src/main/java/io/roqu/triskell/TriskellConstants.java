@@ -3,7 +3,7 @@ package io.roqu.triskell;
 /**
  * @author Loïc Billon
  */
-public class Constants {
+public class TriskellConstants {
 
     public static final String TK_SCHEMA = "triskell";
 

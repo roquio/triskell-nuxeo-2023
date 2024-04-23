@@ -1,28 +1,16 @@
 <?xml version="1.0"?>
 <component name="io.roqu.triskell.repositories.workspaces">
-
 	<require>default-repository-config</require>
 
 	<extension target="org.nuxeo.runtime.datasource" point="datasources">
-		<datasource name="jdbc/repository_${nuxeo.db.workspaces.repository}" driverClassName="org.postgresql.Driver"
-					password="${nuxeo.db.workspaces.password}"
-					url="jdbc:postgresql://${nuxeo.db.workspaces.host}:${nuxeo.db.workspaces.port}/${nuxeo.db.workspaces.name}"
-					username="${nuxeo.db.workspaces.user}"
-					>
-		</datasource>
-
+		<datasource name="jdbc/repository_${nuxeo.db.workspaces.repository}" driverClassName="org.postgresql.Driver" password="${nuxeo.db.workspaces.password}" url="jdbc:postgresql://${nuxeo.db.workspaces.host}:${nuxeo.db.workspaces.port}/${nuxeo.db.workspaces.name}" username="${nuxeo.db.workspaces.user}" />
 	</extension>
 
-
-	<extension target="org.nuxeo.ecm.core.storage.sql.RepositoryService"
-			   point="repository">
-
-		<repository name="${nuxeo.db.workspaces.repository}" label="Workspaces repository"
-					factory="org.nuxeo.ecm.core.storage.sql.ra.PoolingRepositoryFactory">
+	<extension target="org.nuxeo.ecm.core.storage.sql.RepositoryService" point="repository">
+		<repository name="${nuxeo.db.workspaces.repository}" label="Workspaces repository" factory="org.nuxeo.ecm.core.storage.sql.ra.PoolingRepositoryFactory">
 			<pool minPoolSize="0" maxPoolSize="20" blockingTimeoutMillis="100" idleTimeoutMinutes="10" />
 			<clustering enabled="false" delay="1000" />
 		</repository>
-
 	</extension>
 
 	<extension target="org.nuxeo.ecm.core.blob.BlobManager" point="configuration">
@@ -32,18 +20,12 @@
 		</blobprovider>
 	</extension>
 
-	<extension target="org.nuxeo.elasticsearch.ElasticSearchComponent"
-			   point="elasticSearchIndex">
+	<extension target="org.nuxeo.elasticsearch.ElasticSearchComponent" point="elasticSearchIndex">
 		<elasticSearchIndex name="${nuxeo.db.workspaces.repository}" type="doc" repository="${nuxeo.db.workspaces.repository}" manageAlias="false">
 			<fetchFromSource>
-				<include>ecm:*</include>
-				<include>dc:*</include>
+				<include>*</include>
 				<exclude>ecm:binarytext</exclude>
 			</fetchFromSource>
-			<settings file="elasticsearch-doc-settings.json" />
-			<mapping file="elasticsearch-doc-mapping.json" />
 		</elasticSearchIndex>
 	</extension>
-
-
 </component>

@@ -1,12 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Triskell Nuxeo extensions
-Bundle-SymbolicName: fr.toutatice.triskell.nuxeo.extensions;singleton:=true
+Bundle-SymbolicName: io.roqu.triskell.nuxeo.extensions;singleton:=true
 Nuxeo-Component: OSGI-INF/extensions/doctype-contrib.xml,
   OSGI-INF/extensions/schema-contrib.xml,
   OSGI-INF/extensions/elasticsearch-contrib.xml,
   OSGI-INF/extensions/operation-contrib.xml,
   OSGI-INF/extensions/businessid/listener-contrib.xml,
   OSGI-INF/extensions/businessid/directory-contrib.xml,
-  OSGI-INF/extensions/businessid/service-contrib.xml,
-
+  OSGI-INF/extensions/businessid/service-contrib.xml

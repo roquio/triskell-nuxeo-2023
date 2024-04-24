@@ -3,6 +3,7 @@ package io.roqu.triskell.document.operation;
 import io.roqu.triskell.document.operation.runner.GetDocumentByIdUnrestrictedSessionRunner;
 import io.roqu.triskell.document.operation.runner.GetRelatedWorkspaceUnrestrictedSessionRunner;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
 import org.nuxeo.ecm.automation.OperationException;
 import org.nuxeo.ecm.automation.core.Constants;
@@ -82,12 +83,19 @@ public class GetDocumentContext {
             String path;
             if (StringUtils.isEmpty(this.path)) {
                 // Get document with unrestricted rights
-                DocumentModel unrestrictedDocument = this.getUnrestrictedDocument(session, this.id);
+                Pair<String, DocumentModel> unrestrictedDocument = this.getUnrestrictedDocument(session, this.id, false);
                 if (unrestrictedDocument == null) {
-                    throw new DocumentNotFoundException(this.id);
+                    // Retry on all repositories
+                    unrestrictedDocument = this.getUnrestrictedDocument(session, this.id, true);
+                    if (unrestrictedDocument == null) {
+                        throw new DocumentNotFoundException(this.id);
+                    } else {
+                        // Update session
+                        session = SessionFactory.getSession(unrestrictedDocument.getLeft());
+                    }
                 }
 
-                path = unrestrictedDocument.getPathAsString();
+                path = unrestrictedDocument.getRight().getPathAsString();
             } else {
                 path = this.path;
             }
@@ -124,11 +132,18 @@ public class GetDocumentContext {
      * @param id      document identifier
      * @return document
      */
-    private DocumentModel getUnrestrictedDocument(CoreSession session, String id) {
-        GetDocumentByIdUnrestrictedSessionRunner runner = new GetDocumentByIdUnrestrictedSessionRunner(session, id);
+    private Pair<String, DocumentModel> getUnrestrictedDocument(CoreSession session, String id, boolean searchOnAllRepositories) {
+        GetDocumentByIdUnrestrictedSessionRunner runner = new GetDocumentByIdUnrestrictedSessionRunner(session, id, searchOnAllRepositories);
         runner.runUnrestricted();
 
-        return runner.getDocument();
+        Pair<String, DocumentModel> result;
+        if (runner.getDocument() == null) {
+            result = null;
+        } else {
+            result = Pair.of(runner.getRepository(), runner.getDocument());
+        }
+
+        return result;
     }
 
 

@@ -2,6 +2,7 @@ package io.roqu.triskell.document.operation;
 
 import io.roqu.triskell.document.operation.runner.GetDocumentByIdUnrestrictedSessionRunner;
 import io.roqu.triskell.document.operation.runner.GetRelatedWorkspaceUnrestrictedSessionRunner;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
@@ -60,6 +61,12 @@ public class GetDocumentContext {
     @Param(name = "repository", description = "Document repository name", required = false)
     protected String repository;
 
+    /**
+     * Search on all repositories.
+     */
+    @Param(name = "searchOnAllRepositories", description = "Search on all repositories", required = false)
+    protected Boolean searchOnAllRepositories;
+
 
     /**
      * Run operation.
@@ -83,16 +90,12 @@ public class GetDocumentContext {
             String path;
             if (StringUtils.isEmpty(this.path)) {
                 // Get document with unrestricted rights
-                Pair<String, DocumentModel> unrestrictedDocument = this.getUnrestrictedDocument(session, this.id, false);
-                if (unrestrictedDocument == null) {
-                    // Retry on all repositories
-                    unrestrictedDocument = this.getUnrestrictedDocument(session, this.id, true);
-                    if (unrestrictedDocument == null) {
-                        throw new DocumentNotFoundException(this.id);
-                    } else {
-                        // Update session
-                        session = SessionFactory.getSession(unrestrictedDocument.getLeft());
-                    }
+                Pair<String, DocumentModel> unrestrictedDocument = this.getUnrestrictedDocument(session, this.id, BooleanUtils.isTrue(this.searchOnAllRepositories));
+                if ((unrestrictedDocument == null) || (unrestrictedDocument.getRight() == null)) {
+                    throw new DocumentNotFoundException(this.id);
+                } else if (StringUtils.isNotEmpty(unrestrictedDocument.getLeft()) && !StringUtils.equals(unrestrictedDocument.getLeft(), session.getRepositoryName())) {
+                    // Update session
+                    session = SessionFactory.getSession(unrestrictedDocument.getLeft());
                 }
 
                 path = unrestrictedDocument.getRight().getPathAsString();

@@ -6,7 +6,6 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
-import org.nuxeo.ecm.automation.OperationException;
 import org.nuxeo.ecm.automation.core.Constants;
 import org.nuxeo.ecm.automation.core.annotations.Context;
 import org.nuxeo.ecm.automation.core.annotations.Operation;
@@ -74,7 +73,7 @@ public class GetDocumentContext {
      * @return operation result
      */
     @OperationMethod
-    public Blob run() throws OperationException {
+    public Blob run() {
         // Session
         CoreSession session;
         if (StringUtils.isEmpty(this.repository) || StringUtils.equals(this.repository, this.session.getRepositoryName())) {
@@ -115,10 +114,12 @@ public class GetDocumentContext {
 
         // JSON object
         JSONObject jsonObject = new JSONObject();
+        jsonObject.accumulate("repository", document.getRepositoryName());
         jsonObject.accumulate("id", document.getPropertyValue("tk:id"));
         jsonObject.accumulate("path", document.getPathAsString());
         jsonObject.accumulate("uuid", document.getId());
-        jsonObject.accumulate("repository", document.getRepositoryName());
+        jsonObject.accumulate("type", document.getType());
+        jsonObject.accumulate("title", document.getTitle());
         if (workspace != null) {
             jsonObject.accumulate("workspaceId", workspace.getPropertyValue("tk:id"));
             jsonObject.accumulate("workspacePath", workspace.getPathAsString());

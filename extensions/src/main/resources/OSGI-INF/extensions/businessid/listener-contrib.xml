@@ -7,7 +7,7 @@
         <listener name="uniqueIdListener" async="false"
                   postCommit="false"
                   enabled="true"
-                  class="io.roqu.triskell.listener.UniqueIdListener"
+                  class="io.roqu.triskell.businessid.UniqueIdListener"
                   >
             <event>aboutToCreate</event>
         </listener>

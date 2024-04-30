@@ -25,9 +25,9 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
-        <nuxeo.version>2023.5-SNAPSHOT</nuxeo.version>
+        <nuxeo.version>2023.7-SNAPSHOT</nuxeo.version>
 
-        <project-lombok.version>1.18.30</project-lombok.version>
+        <project-lombok.version>1.18.32</project-lombok.version>
     </properties>
 
 

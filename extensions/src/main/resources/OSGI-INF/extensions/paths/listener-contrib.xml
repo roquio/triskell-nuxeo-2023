@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<component name="io.roqu.triskell.paths.listener">
+    <require>org.nuxeo.ecm.core.event.EventServiceComponent</require>
+
+    <extension target="org.nuxeo.ecm.core.event.EventServiceComponent"
+               point="listener">
+        <listener name="pathsListener" async="false"
+                  postCommit="false"
+                  enabled="true"
+                  class="io.roqu.triskell.paths.PathsListener"
+                  >
+            <event>aboutToCreate</event>
+        </listener>
+    </extension>
+</component>

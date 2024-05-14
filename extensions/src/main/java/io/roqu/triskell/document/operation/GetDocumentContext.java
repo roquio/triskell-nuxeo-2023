@@ -1,5 +1,6 @@
 package io.roqu.triskell.document.operation;
 
+import io.roqu.triskell.TriskellConstants;
 import io.roqu.triskell.document.operation.runner.GetDocumentByIdUnrestrictedSessionRunner;
 import io.roqu.triskell.document.operation.runner.GetRelatedWorkspaceUnrestrictedSessionRunner;
 import org.apache.commons.lang3.BooleanUtils;
@@ -121,7 +122,7 @@ public class GetDocumentContext {
         jsonObject.accumulate("type", document.getType());
         jsonObject.accumulate("title", document.getTitle());
         if (workspace != null) {
-            jsonObject.accumulate("workspaceId", workspace.getPropertyValue("tk:id"));
+            jsonObject.accumulate("workspaceId", workspace.getPropertyValue(TriskellConstants.TK_ID_FIELD));
             jsonObject.accumulate("workspacePath", workspace.getPathAsString());
         }
 

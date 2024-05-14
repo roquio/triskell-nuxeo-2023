@@ -4,9 +4,9 @@
     <extension target="org.nuxeo.ecm.directory.sql.SQLDirectoryFactory"
                point="directories">
         <directory name="businessidentifiers">
-            <schema>businessidentifier</schema>
+            <schema>businessIdentifier</schema>
             <dataSource>java:/nxsqldirectory</dataSource>
-            <table>businessidentifier</table>
+            <table>business_identifier</table>
             <idField>id</idField>
             <autoincrementIdField>false</autoincrementIdField>
             <createTablePolicy>on_missing_columns</createTablePolicy>
@@ -15,6 +15,6 @@
     </extension>
 
     <extension target="org.nuxeo.ecm.core.schema.TypeService" point="schema">
-        <schema name="businessidentifier"  src="schema/businessidentifier.xsd"/>
+        <schema name="businessIdentifier"  src="schema/business-identifier.xsd"/>
     </extension>
 </component>

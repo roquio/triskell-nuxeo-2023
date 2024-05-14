@@ -1,22 +1,74 @@
 <?xml version="1.0"?>
 <component name="io.roqu.triskell.doctype" version="1.0">
+
     <require>org.nuxeo.ecm.core.schema.TypeService</require>
+    <require>org.nuxeo.ecm.core.CoreExtensions</require>
 
     <extension target="org.nuxeo.ecm.core.schema.TypeService" point="doctype">
+        <facet name="Navigable">
+            <schema name="navigation"/>
+        </facet>
+
         <doctype name="Workspace" append="true">
-            <schema name="triskell"/>
+            <facet>Navigable</facet>
+            <schema name="workspace"/>
+        </doctype>
+
+        <doctype name="Room">
+            <facet>Navigable</facet>
+        </doctype>
+
+        <doctype name="InvitationsFolder">
+        </doctype>
+
+        <doctype name="Invitation">
+            <schema name="invitation"/>
+        </doctype>
+        <doctype name="InvitationRequest">
+            <schema name="invitation"/>
+        </doctype>
+
+        <doctype name="WorkspaceStats">
+            <schema name="workspaceStats"/>
         </doctype>
 
         <doctype name="Folder" append="true">
-            <schema name="triskell"/>
+            <facet>Navigable</facet>
         </doctype>
 
         <doctype name="File" append="true">
-            <schema name="triskell"/>
+            <facet>Navigable</facet>
         </doctype>
 
         <doctype name="Note" append="true">
-            <schema name="triskell"/>
+            <facet>Navigable</facet>
         </doctype>
+    </extension>
+
+
+    <extension target="org.nuxeo.ecm.platform.types.TypeService" point="types">
+
+
+        <type id="Workspace">
+            <subtypes>
+                <type>Room</type>
+                <type>WorkspaceStats</type>
+                <type>InvitationsFolder</type>
+            </subtypes>
+        </type>
+
+        <type id="Room">
+            <subtypes>
+                <type>Folder</type>
+            </subtypes>
+        </type>
+
+        <type id="InvitationsFolder">
+            <subtypes>
+                <type>Invitation</type>
+                <type>InvitationRequest</type>
+            </subtypes>
+        </type>
+
     </extension>
 </component>

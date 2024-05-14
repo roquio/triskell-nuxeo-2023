@@ -5,7 +5,7 @@
     <require>org.nuxeo.ecm.directory.types</require>
 
     <extension target="org.nuxeo.ecm.core.schema.TypeService" point="schema">
-        <schema name="user" src="schema/triskell-user.xsd" override="true"/>
-        <schema name="group" src="schema/triskell-group.xsd" override="true"/>
+        <schema name="user" src="schema/workspace-user.xsd" override="true"/>
+        <schema name="group" src="schema/workspace-group.xsd" override="true"/>
     </extension>
 </component>

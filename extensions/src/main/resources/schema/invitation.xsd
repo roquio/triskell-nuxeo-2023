@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<xs:schema targetNamespace="http://www.roqu.io/worskpaces/schemas/invitation/"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:nxs="http://www.roqu.io/worskpaces/schemas/invitation/">
+
+    <xs:include schemaLocation="base.xsd" />
+
+    <xs:simpleType name="localGroupsList">
+        <xs:list>
+            <xs:simpleType>
+                <xs:restriction base="xs:string" />
+            </xs:simpleType>
+        </xs:list>
+    </xs:simpleType>
+
+
+    <xs:element name="initiator" type="xs:string"/>
+    <xs:element name="localGroups" type="nxs:localGroupsList"/>
+    <xs:element name="invitationResendingDate" type="xs:date"/>
+    <xs:element name="state" type="xs:string"/>
+    <xs:element name="message" type="xs:string"/>
+    <xs:element name="role" type="xs:string"/>
+
+</xs:schema>

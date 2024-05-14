@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<component name="io.roqu.triskell.usermanagement.schema" version="1.0">
+
+    <require>org.nuxeo.ecm.core.schema.TypeService</require>
+    <require>org.nuxeo.ecm.directory.types</require>
+
+    <extension target="org.nuxeo.ecm.core.schema.TypeService" point="schema">
+        <schema name="user" src="schema/triskell-user.xsd" override="true"/>
+        <schema name="group" src="schema/triskell-group.xsd" override="true"/>
+    </extension>
+</component>

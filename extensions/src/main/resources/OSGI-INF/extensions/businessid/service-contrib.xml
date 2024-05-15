@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<component name="io.roqu.triskell.businessid.service">
+<component name="io.roqu.workspaces.businessid.service">
 
     <documentation>
         This component provide a generator of short business Ids.
         The given IDs are stored in a repository which garantee the unicity
     </documentation>
-    <implementation class="io.roqu.triskell.businessid.BusinessIdServiceImpl" />
+    <implementation class="io.roqu.workspaces.businessid.BusinessIdServiceImpl" />
     <service>
-        <provide interface="io.roqu.triskell.businessid.BusinessIdService" />
+        <provide interface="io.roqu.workspaces.businessid.BusinessIdService" />
     </service>
 
 </component>

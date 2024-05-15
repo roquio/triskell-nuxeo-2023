@@ -22,7 +22,7 @@
 
         <dependencySet>
             <includes>
-                <include>${project.groupId}:triskell-nuxeo-extensions:jar:${project.version}</include>
+                <include>${project.groupId}:workspaces-extension:jar:${project.version}</include>
             </includes>
             <outputDirectory>${artifactId}-${project.version}/nxserver/plugins</outputDirectory>
             <scope>runtime</scope>

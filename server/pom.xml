@@ -5,21 +5,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>io.roqu.triskell.nuxeo</groupId>
-        <artifactId>triskell-nuxeo-parent</artifactId>
+        <groupId>io.roqu.workspaces.nuxeo</groupId>
+        <artifactId>nuxeo-workspaces-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>triskell-nuxeo-server</artifactId>
+    <artifactId>nuxeo-workspaces-server</artifactId>
     <packaging>pom</packaging>
 
-    <name>Triskell – Nuxeo – Server</name>
+    <name>Workspaces – Nuxeo server</name>
 
 
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>triskell-nuxeo-extensions</artifactId>
+            <artifactId>workspaces-extension</artifactId>
             <version>${project.version}</version>
         </dependency>
 

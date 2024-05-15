@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<component name="io.roqu.triskell.operation" version="1.0">
+<component name="io.roqu.workspaces.operation" version="1.0">
     <require>org.nuxeo.ecm.core.operation.OperationServiceComponent</require>
 
     <extension target="org.nuxeo.ecm.core.operation.OperationServiceComponent" point="operations">
-        <operation class="io.roqu.triskell.document.operation.GetDocumentContext"/>
-        <operation class="io.roqu.triskell.elasticsearch.operation.ElasticSearchQuery"/>
+        <operation class="io.roqu.workspaces.document.operation.GetDocumentContext"/>
+        <operation class="io.roqu.workspaces.elasticsearch.operation.ElasticSearchQuery"/>
 
-        <operation class="io.roqu.triskell.workspaces.operation.WorkspaceCreation" />
+        <operation class="io.roqu.workspaces.workspaces.operation.WorkspaceCreation" />
     </extension>
 </component>

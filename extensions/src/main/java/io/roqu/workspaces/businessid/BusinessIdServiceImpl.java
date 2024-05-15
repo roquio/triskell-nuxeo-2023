@@ -1,6 +1,6 @@
-package io.roqu.triskell.businessid;
+package io.roqu.workspaces.businessid;
 
-import io.roqu.triskell.TriskellConstants;
+import io.roqu.workspaces.WorkspacesConstants;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.directory.DirectoryException;
@@ -49,7 +49,7 @@ public class BusinessIdServiceImpl extends DefaultComponent implements BusinessI
 
         if(session == null || !session.isLive()) {
             DirectoryService directoryService = Framework.getService(DirectoryService.class);
-            SQLDirectory sqlDir = (SQLDirectory) directoryService.getDirectory(TriskellConstants.BUSINESS_DIR);
+            SQLDirectory sqlDir = (SQLDirectory) directoryService.getDirectory(WorkspacesConstants.BUSINESS_DIR);
 
             session = sqlDir.getSession();
         }

@@ -1,8 +1,8 @@
-package io.roqu.triskell.document.operation;
+package io.roqu.workspaces.document.operation;
 
-import io.roqu.triskell.TriskellConstants;
-import io.roqu.triskell.document.operation.runner.GetDocumentByIdUnrestrictedSessionRunner;
-import io.roqu.triskell.document.operation.runner.GetRelatedWorkspaceUnrestrictedSessionRunner;
+import io.roqu.workspaces.WorkspacesConstants;
+import io.roqu.workspaces.document.operation.runner.GetDocumentByIdUnrestrictedSessionRunner;
+import io.roqu.workspaces.document.operation.runner.GetRelatedWorkspaceUnrestrictedSessionRunner;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -116,13 +116,13 @@ public class GetDocumentContext {
         // JSON object
         JSONObject jsonObject = new JSONObject();
         jsonObject.accumulate("repository", document.getRepositoryName());
-        jsonObject.accumulate("id", document.getPropertyValue(TriskellConstants.TK_ID_FIELD));
+        jsonObject.accumulate("id", document.getPropertyValue(WorkspacesConstants.ID_FIELD));
         jsonObject.accumulate("path", document.getPathAsString());
         jsonObject.accumulate("uuid", document.getId());
         jsonObject.accumulate("type", document.getType());
         jsonObject.accumulate("title", document.getTitle());
         if (workspace != null) {
-            jsonObject.accumulate("workspaceId", workspace.getPropertyValue(TriskellConstants.TK_ID_FIELD));
+            jsonObject.accumulate("workspaceId", workspace.getPropertyValue(WorkspacesConstants.ID_FIELD));
             jsonObject.accumulate("workspacePath", workspace.getPathAsString());
         }
 

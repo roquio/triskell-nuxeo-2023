@@ -1,4 +1,4 @@
-package io.roqu.triskell.paths;
+package io.roqu.workspaces.paths;
 
 import org.apache.commons.lang3.StringUtils;
 import org.nuxeo.common.utils.IdUtils;
@@ -8,7 +8,7 @@ import org.nuxeo.ecm.core.api.pathsegment.PathSegmentService;
 /**
  * @author Loïc Billon
  */
-public class TkPathSegmentServiceImpl implements PathSegmentService {
+public class WorkspacesPathSegmentServiceImpl implements PathSegmentService {
 
 	protected final int maxSize = 64;
 	

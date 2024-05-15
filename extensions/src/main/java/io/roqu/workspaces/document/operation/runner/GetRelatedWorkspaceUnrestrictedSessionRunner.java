@@ -1,4 +1,4 @@
-package io.roqu.triskell.document.operation.runner;
+package io.roqu.workspaces.document.operation.runner;
 
 import lombok.Getter;
 import org.apache.commons.collections4.CollectionUtils;

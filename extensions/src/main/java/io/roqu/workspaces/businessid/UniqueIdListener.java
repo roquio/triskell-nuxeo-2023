@@ -1,7 +1,6 @@
-package io.roqu.triskell.businessid;
+package io.roqu.workspaces.businessid;
 
-import io.roqu.triskell.TriskellConstants;
-import io.roqu.triskell.businessid.BusinessIdService;
+import io.roqu.workspaces.WorkspacesConstants;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.event.Event;
@@ -22,12 +21,12 @@ public class UniqueIdListener implements EventListener {
 
         if(event.getContext() instanceof DocumentEventContext docCtx) {
             DocumentModel sourceDocument = docCtx.getSourceDocument();
-            if(sourceDocument.hasSchema(TriskellConstants.TK_SCHEMA)) {
+            if(sourceDocument.hasSchema(WorkspacesConstants.NAVIGATION_SCHEMA)) {
 
                 try {
                     String newId = Framework.getService(BusinessIdService.class).getNewId();
 
-                    sourceDocument.setPropertyValue(TriskellConstants.TK_ID_FIELD, newId);
+                    sourceDocument.setPropertyValue(WorkspacesConstants.ID_FIELD, newId);
                 }
                 catch (NuxeoException e) {
                     event.markBubbleException();

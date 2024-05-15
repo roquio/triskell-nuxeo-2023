@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Triskell Nuxeo extensions
-Bundle-SymbolicName: io.roqu.triskell.nuxeo.extensions;singleton:=true
+Bundle-Name: Roquio workspaces Nuxeo extensions
+Bundle-SymbolicName: io.roqu.workspaces.nuxeo.extensions;singleton:=true
 Nuxeo-Component: OSGI-INF/extensions/doctype-contrib.xml,
   OSGI-INF/extensions/schema-contrib.xml,
   OSGI-INF/extensions/elasticsearch-contrib.xml,

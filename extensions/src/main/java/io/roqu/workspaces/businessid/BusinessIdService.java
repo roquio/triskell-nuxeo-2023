@@ -1,4 +1,4 @@
-package io.roqu.triskell.businessid;
+package io.roqu.workspaces.businessid;
 
 import org.nuxeo.ecm.core.api.NuxeoException;
 

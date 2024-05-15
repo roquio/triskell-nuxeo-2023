@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<component name="io.roqu.triskell.repositories.notifications">
+<component name="io.roqu.workspaces.repositories.modulo">
 
 	<require>default-repository-config</require>
 
 	<extension target="org.nuxeo.runtime.datasource" point="datasources">
-		<datasource name="jdbc/repository_${nuxeo.db.notifications.repository}" driverClassName="org.postgresql.Driver"
-					password="${nuxeo.db.notifications.password}"
-					url="jdbc:postgresql://${nuxeo.db.notifications.host}:${nuxeo.db.notifications.port}/${nuxeo.db.notifications.name}"
-					username="${nuxeo.db.notifications.user}"
+		<datasource name="jdbc/repository_${nuxeo.db.modulo.repository}" driverClassName="org.postgresql.Driver"
+					password="${nuxeo.db.modulo.password}"
+					url="jdbc:postgresql://${nuxeo.db.modulo.host}:${nuxeo.db.modulo.port}/${nuxeo.db.modulo.name}"
+					username="${nuxeo.db.modulo.user}"
 					>
 		</datasource>
 
@@ -17,7 +17,7 @@
 	<extension target="org.nuxeo.ecm.core.storage.sql.RepositoryService"
 			   point="repository">
 
-		<repository name="${nuxeo.db.notifications.repository}" label="Notifications repository"
+		<repository name="${nuxeo.db.modulo.repository}" label="Modulo repository"
 					factory="org.nuxeo.ecm.core.storage.sql.ra.PoolingRepositoryFactory">
 			<pool minPoolSize="0" maxPoolSize="20" blockingTimeoutMillis="100" idleTimeoutMinutes="10" />
 			<clustering enabled="false" delay="1000" />
@@ -26,15 +26,15 @@
 	</extension>
 
 	<extension target="org.nuxeo.ecm.core.blob.BlobManager" point="configuration">
-		<blobprovider name="${nuxeo.db.notifications.repository}">
+		<blobprovider name="${nuxeo.db.modulo.repository}">
 			<class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
-			<property name="path">${nuxeo.db.notifications.datadir}</property>
+			<property name="path">${nuxeo.db.modulo.datadir}</property>
 		</blobprovider>
 	</extension>
 
 	<extension target="org.nuxeo.elasticsearch.ElasticSearchComponent"
 			   point="elasticSearchIndex">
-		<elasticSearchIndex name="${nuxeo.db.notifications.repository}" type="doc" repository="${nuxeo.db.notifications.repository}" manageAlias="false">
+		<elasticSearchIndex name="${nuxeo.db.modulo.repository}" type="doc" repository="${nuxeo.db.modulo.repository}" manageAlias="false">
 			<fetchFromSource>
 				<include>ecm:*</include>
 				<include>dc:*</include>

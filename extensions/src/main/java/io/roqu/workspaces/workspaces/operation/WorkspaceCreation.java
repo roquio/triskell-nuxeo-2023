@@ -1,6 +1,6 @@
-package io.roqu.triskell.workspaces.operation;
+package io.roqu.workspaces.workspaces.operation;
 
-import io.roqu.triskell.TriskellConstants;
+import io.roqu.workspaces.WorkspacesConstants;
 import org.nuxeo.ecm.automation.core.Constants;
 import org.nuxeo.ecm.automation.core.annotations.Context;
 import org.nuxeo.ecm.automation.core.annotations.Operation;
@@ -61,7 +61,7 @@ public class WorkspaceCreation {
         workspace.setPropertyValue("dc:title", title);
         workspace = session.createDocument(workspace);
 
-        String businessId = workspace.getPropertyValue(TriskellConstants.TK_ID_FIELD).toString();
+        String businessId = workspace.getPropertyValue(WorkspacesConstants.ID_FIELD).toString();
 
         UserManager userManager = Framework.getService(UserManager.class);
         NuxeoGroupImpl readers = new NuxeoGroupImpl(businessId+"_readers", "Readers of "+businessId);

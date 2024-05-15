@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<component name="io.roqu.triskell.elasticsearch" version="1.0">
+<component name="io.roqu.workspaces.elasticsearch" version="1.0">
     <require>org.nuxeo.elasticsearch.ElasticSearchComponent</require>
 
     <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent" point="elasticSearchIndex">

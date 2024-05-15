@@ -1,4 +1,4 @@
-package io.roqu.triskell.paths;
+package io.roqu.workspaces.paths;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;

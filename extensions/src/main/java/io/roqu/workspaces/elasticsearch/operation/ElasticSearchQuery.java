@@ -1,4 +1,4 @@
-package io.roqu.triskell.elasticsearch.operation;
+package io.roqu.workspaces.elasticsearch.operation;
 
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;

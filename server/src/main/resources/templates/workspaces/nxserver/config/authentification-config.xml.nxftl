@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<component name="io.roqu.triskell.authentification">
+<component name="io.roqu.workspaces.authentification">
     <require>org.nuxeo.ecm.platform.login.Portal</require>
     <require>org.nuxeo.ecm.platform.ui.web.auth.service.PluggableAuthenticationService</require>
     <require>org.nuxeo.ecm.automation.server.auth.config</require>

@@ -1,2 +1,2 @@
 nuxeo.template.includes=postgresql
-triskell.target=.
+workspaces.target=.

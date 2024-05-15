@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<component name="io.roqu.triskell.paths">
+<component name="io.roqu.workspaces.paths">
 
 	<extension target="org.nuxeo.ecm.core.api.pathsegment.PathSegmentService"
 		point="pathSegmentService">
 		<service
-			class="io.roqu.triskell.paths.TkPathSegmentServiceImpl" />
+			class="io.roqu.workspaces.paths.WorkspacesPathSegmentServiceImpl" />
 	</extension>
 
 </component>

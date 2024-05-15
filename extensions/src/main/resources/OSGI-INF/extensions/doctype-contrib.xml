@@ -14,7 +14,7 @@
         </facet>
 
         <doctype name="Room">
-            <facet>Navigable</facet>
+            <facet name="Navigable"/>
             <subtypes>
                 <type>Folder</type>
             </subtypes>
@@ -39,7 +39,7 @@
         </doctype>
 
         <doctype name="Workspace" append="true">
-            <facet>Navigable</facet>
+            <facet name="Navigable"/>
             <schema name="workspace"/>
             <subtypes>
                 <type>Room</type>
@@ -49,15 +49,15 @@
         </doctype>
 
         <doctype name="Folder" append="true">
-            <facet>Navigable</facet>
+            <facet name="Navigable"/>
         </doctype>
 
         <doctype name="File" append="true">
-            <facet>Navigable</facet>
+            <facet name="Navigable"/>
         </doctype>
 
         <doctype name="Note" append="true">
-            <facet>Navigable</facet>
+            <facet name="Navigable"/>
         </doctype>
     </extension>
 

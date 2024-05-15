@@ -3,7 +3,7 @@
 
     <extension target="org.nuxeo.ecm.directory.sql.SQLDirectoryFactory"
                point="directories">
-        <directory name="businessidentifiers">
+        <directory name="businessIdentifiers">
             <schema>businessIdentifier</schema>
             <dataSource>java:/nxsqldirectory</dataSource>
             <table>business_identifier</table>

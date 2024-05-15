@@ -15,7 +15,6 @@
     <modules>
         <module>extensions</module>
         <module>server</module>
-        <module>test-client</module>
     </modules>
 
 

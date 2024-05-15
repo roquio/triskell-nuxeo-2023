@@ -1,5 +1,6 @@
 package io.roqu.triskell.document.operation.runner;
 
+import io.roqu.triskell.TriskellConstants;
 import lombok.Getter;
 import org.apache.commons.lang3.ArrayUtils;
 import org.nuxeo.ecm.core.api.CoreSession;
@@ -25,7 +26,8 @@ public class GetDocumentByIdUnrestrictedSessionRunner extends UnrestrictedSessio
     /**
      * Query
      */
-    private static final String QUERY = "SELECT * FROM Document WHERE tk:id = '%s' AND ecm:isVersion = 0 AND ecm:isProxy = 0";
+    private static final String QUERY = "SELECT * FROM Document WHERE "
+        +TriskellConstants.TK_ID_FIELD+" = '%s' AND ecm:isVersion = 0 AND ecm:isProxy = 0";
 
 
     /**

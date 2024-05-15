@@ -116,7 +116,7 @@ public class GetDocumentContext {
         // JSON object
         JSONObject jsonObject = new JSONObject();
         jsonObject.accumulate("repository", document.getRepositoryName());
-        jsonObject.accumulate("id", document.getPropertyValue("tk:id"));
+        jsonObject.accumulate("id", document.getPropertyValue(TriskellConstants.TK_ID_FIELD));
         jsonObject.accumulate("path", document.getPathAsString());
         jsonObject.accumulate("uuid", document.getId());
         jsonObject.accumulate("type", document.getType());

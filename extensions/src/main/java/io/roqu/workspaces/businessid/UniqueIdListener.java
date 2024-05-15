@@ -6,7 +6,6 @@ import org.nuxeo.ecm.core.api.NuxeoException;
 import org.nuxeo.ecm.core.event.Event;
 import org.nuxeo.ecm.core.event.EventListener;
 import org.nuxeo.ecm.core.event.impl.DocumentEventContext;
-import org.nuxeo.runtime.api.Framework;
 
 
 /**
@@ -24,7 +23,9 @@ public class UniqueIdListener implements EventListener {
             if(sourceDocument.hasSchema(WorkspacesConstants.NAVIGATION_SCHEMA)) {
 
                 try {
-                    String newId = Framework.getService(BusinessIdService.class).getNewId();
+                    BusinessIdRunner runner = new BusinessIdRunner(event.getContext().getCoreSession());
+                    runner.runUnrestricted();
+                    String newId = runner.getRandomId();
 
                     sourceDocument.setPropertyValue(WorkspacesConstants.ID_FIELD, newId);
                 }

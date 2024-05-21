@@ -64,15 +64,15 @@ public class WorkspaceCreation {
         String businessId = workspace.getPropertyValue(WorkspacesConstants.ID_FIELD).toString();
 
         UserManager userManager = Framework.getService(UserManager.class);
-        NuxeoGroupImpl readers = new NuxeoGroupImpl(businessId+"_readers", "Readers of "+businessId);
+        NuxeoGroupImpl readers = new WorkspaceGroup(businessId, WorkspaceGroup.Role.reader);
         userManager.createGroup(readers.getModel());
-        NuxeoGroupImpl writers = new NuxeoGroupImpl(businessId+"_writers", "Writers of "+businessId);
+        NuxeoGroupImpl writers = new WorkspaceGroup(businessId, WorkspaceGroup.Role.writer);
         userManager.createGroup(writers.getModel());
-        NuxeoGroupImpl admins = new NuxeoGroupImpl(businessId+"_admins", "Admins of "+businessId);
+        NuxeoGroupImpl admins = new WorkspaceGroup(businessId, WorkspaceGroup.Role.administrator);
         admins.setMemberUsers(List.of(owner));
         userManager.createGroup(admins.getModel());
 
-        NuxeoGroupImpl members = new NuxeoGroupImpl(businessId+"_members", "Members of "+businessId);
+        NuxeoGroupImpl members = new WorkspaceGroup(businessId);
         members.setMemberGroups(List.of(readers.getName(), writers.getName(), admins.getName()));
         userManager.createGroup(members.getModel());
 

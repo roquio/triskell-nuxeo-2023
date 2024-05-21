@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<component name="io.roqu.workspaces.usermanager">
+
+    <require>org.nuxeo.ecm.platform.usermanager.UserManagerImpl</require>
+
+    <extension
+            target="org.nuxeo.ecm.platform.usermanager.UserService"
+            point="userManager">
+        <userManager>
+            <users>
+                <directory>userDirectory</directory>
+                <searchFields append="true">
+                    <substringMatchSearchField>username</substringMatchSearchField>
+                    <substringMatchSearchField>firstName</substringMatchSearchField>
+                    <substringMatchSearchField>lastName</substringMatchSearchField>
+                </searchFields>
+                <listingMode>search_only</listingMode>
+            </users>
+
+            <defaultAdministratorId>${nuxeo.defaultAdministratorId}</defaultAdministratorId>
+            <administratorsGroup>administrators</administratorsGroup>
+            <disableDefaultAdministratorsGroup>false</disableDefaultAdministratorsGroup>
+
+            <groups>
+                <directory>groupDirectory</directory>
+            </groups>
+            <defaultGroup>members</defaultGroup>
+            <groupSortField>groupname</groupSortField>
+            <userSortField>lastName</userSortField>
+        </userManager>
+    </extension>
+
+</component>

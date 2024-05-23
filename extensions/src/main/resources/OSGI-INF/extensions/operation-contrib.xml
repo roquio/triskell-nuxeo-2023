@@ -6,6 +6,7 @@
         <operation class="io.roqu.workspaces.document.operation.GetDocumentContext"/>
         <operation class="io.roqu.workspaces.document.operation.GetDocumentUserPermissions"/>
         <operation class="io.roqu.workspaces.elasticsearch.operation.ElasticSearchQuery"/>
+        <operation class="io.roqu.workspaces.elasticsearch.operation.ReindexElasticSearch"/>
         <operation class="io.roqu.workspaces.workspaces.operation.WorkspaceCreation"/>
     </extension>
 </component>

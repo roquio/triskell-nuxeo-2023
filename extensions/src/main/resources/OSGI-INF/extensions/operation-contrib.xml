@@ -4,8 +4,8 @@
 
     <extension target="org.nuxeo.ecm.core.operation.OperationServiceComponent" point="operations">
         <operation class="io.roqu.workspaces.document.operation.GetDocumentContext"/>
+        <operation class="io.roqu.workspaces.document.operation.GetDocumentUserPermissions"/>
         <operation class="io.roqu.workspaces.elasticsearch.operation.ElasticSearchQuery"/>
-
-        <operation class="io.roqu.workspaces.workspaces.operation.WorkspaceCreation" />
+        <operation class="io.roqu.workspaces.workspaces.operation.WorkspaceCreation"/>
     </extension>
 </component>

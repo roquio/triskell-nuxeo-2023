@@ -2,7 +2,7 @@ package io.roqu.workspaces.document.operation;
 
 import io.roqu.workspaces.WorkspacesConstants;
 import io.roqu.workspaces.document.operation.runner.GetDocumentByIdUnrestrictedSessionRunner;
-import io.roqu.workspaces.document.operation.runner.GetRelatedWorkspaceUnrestrictedSessionRunner;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -16,6 +16,8 @@ import org.nuxeo.ecm.core.api.*;
 import org.nuxeo.ecm.core.api.impl.blob.StringBlob;
 import org.nuxeo.ecm.core.api.security.SecurityConstants;
 import org.nuxeo.ecm.webengine.jaxrs.session.SessionFactory;
+
+import java.util.List;
 
 /**
  * Get document context operation.
@@ -110,8 +112,10 @@ public class GetDocumentContext {
 
         // Document
         DocumentModel document = session.getDocument(documentRef);
-        // Related workspace
-        DocumentModel workspace = this.getRelatedWorkspace(session, document.getPathAsString());
+        // Related workspace and room
+        Pair<DocumentModel, DocumentModel> workspaceAndRoom = this.getRelatedWorkspaceAndRoom(session, document.getPathAsString());
+        DocumentModel workspace = workspaceAndRoom.getLeft();
+        DocumentModel room = workspaceAndRoom.getRight();
 
         // JSON object
         JSONObject jsonObject = new JSONObject();
@@ -124,6 +128,10 @@ public class GetDocumentContext {
         if (workspace != null) {
             jsonObject.accumulate("workspaceId", workspace.getPropertyValue(WorkspacesConstants.ID_FIELD));
             jsonObject.accumulate("workspacePath", workspace.getPathAsString());
+        }
+        if (room != null) {
+            jsonObject.accumulate("roomId", room.getPropertyValue(WorkspacesConstants.ID_FIELD));
+            jsonObject.accumulate("roomPath", room.getPathAsString());
         }
 
         return new StringBlob(jsonObject.toString(), "application/json");
@@ -153,28 +161,41 @@ public class GetDocumentContext {
 
 
     /**
-     * Get related workspace document.
+     * Get related workspace and room documents.
      *
      * @param session session
      * @param path    document path
-     * @return document
+     * @return pair of workspace and room documents
      */
-    private DocumentModel getRelatedWorkspace(CoreSession session, String path) {
-        GetRelatedWorkspaceUnrestrictedSessionRunner runner = new GetRelatedWorkspaceUnrestrictedSessionRunner(session, path);
-        runner.runUnrestricted();
+    private Pair<DocumentModel, DocumentModel> getRelatedWorkspaceAndRoom(CoreSession session, String path) {
+        List<DocumentModel> parents = CoreInstance.doPrivileged(session, privilegedSession -> {
+            DocumentRef documentRef = new PathRef(path);
+
+            return session.getParentDocuments(documentRef);
+        });
 
         DocumentModel workspace;
-        if (runner.getWorkspace() == null) {
-            // Not found
+        DocumentModel room;
+        if (CollectionUtils.isEmpty(parents)) {
             workspace = null;
-        } else if (session.hasPermission(runner.getWorkspace().getRef(), SecurityConstants.READ)) {
-            workspace = runner.getWorkspace();
+            room = null;
         } else {
-            // Forbidden
-            workspace = null;
+            // Workspace
+            workspace = parents.stream()
+                    .filter(document -> "Workspace".equals(document.getType()))
+                    .filter(document -> session.hasPermission(document.getRef(), SecurityConstants.READ))
+                    .findAny()
+                    .orElse(null);
+
+            // Room
+            room = parents.stream()
+                    .filter(document -> "Room".equals(document.getType()))
+                    .filter(document -> session.hasPermission(document.getRef(), SecurityConstants.READ))
+                    .findAny()
+                    .orElse(null);
         }
 
-        return workspace;
+        return Pair.of(workspace, room);
     }
 
 }

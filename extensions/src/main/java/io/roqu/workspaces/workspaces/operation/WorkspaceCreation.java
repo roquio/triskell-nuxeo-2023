@@ -1,6 +1,8 @@
 package io.roqu.workspaces.workspaces.operation;
 
 import io.roqu.workspaces.WorkspacesConstants;
+import io.roqu.workspaces.membermanagement.model.WorkspaceGroup;
+import io.roqu.workspaces.membermanagement.service.WorkspaceMemberManagementService;
 import org.nuxeo.ecm.automation.core.Constants;
 import org.nuxeo.ecm.automation.core.annotations.Context;
 import org.nuxeo.ecm.automation.core.annotations.Operation;
@@ -11,11 +13,7 @@ import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.security.ACE;
 import org.nuxeo.ecm.core.api.security.ACP;
 import org.nuxeo.ecm.core.api.security.impl.ACPImpl;
-import org.nuxeo.ecm.platform.usermanager.NuxeoGroupImpl;
-import org.nuxeo.ecm.platform.usermanager.UserManager;
 import org.nuxeo.runtime.api.Framework;
-
-import java.util.List;
 
 
 /**
@@ -57,31 +55,24 @@ public class WorkspaceCreation {
 
         DocumentModel workspaceRoot = session.getDocument(parent.getRef());
 
+        // Create workspace document
         DocumentModel workspace = session.createDocumentModel(workspaceRoot.getPathAsString(), title, "Workspace");
         workspace.setPropertyValue("dc:title", title);
         workspace = session.createDocument(workspace);
 
-        String businessId = workspace.getPropertyValue(WorkspacesConstants.ID_FIELD).toString();
+        String workspaceId = workspace.getPropertyValue(WorkspacesConstants.ID_FIELD).toString();
 
-        UserManager userManager = Framework.getService(UserManager.class);
-        NuxeoGroupImpl readers = new WorkspaceGroup(businessId, WorkspaceGroup.Role.reader);
-        userManager.createGroup(readers.getModel());
-        NuxeoGroupImpl writers = new WorkspaceGroup(businessId, WorkspaceGroup.Role.writer);
-        userManager.createGroup(writers.getModel());
-        NuxeoGroupImpl admins = new WorkspaceGroup(businessId, WorkspaceGroup.Role.administrator);
-        admins.setMemberUsers(List.of(owner));
-        userManager.createGroup(admins.getModel());
+        // Create groups
+        WorkspaceMemberManagementService service = Framework.getService(WorkspaceMemberManagementService.class);
+        service.createWorkspaceGroups(workspaceId, owner);
 
-        NuxeoGroupImpl members = new WorkspaceGroup(businessId);
-        members.setMemberGroups(List.of(readers.getName(), writers.getName(), admins.getName()));
-        userManager.createGroup(members.getModel());
-
+        // Create ACLs
         ACP acp = new ACPImpl();
 
 
-        acp.addACE("local", new ACE.ACEBuilder(readers.getName(),"Read").isGranted(true).build());
-        acp.addACE("local", new ACE.ACEBuilder(writers.getName(),"ReadWrite").isGranted(true).build());
-        acp.addACE("local", new ACE.ACEBuilder(admins.getName(),"Everything").isGranted(true).build());
+        acp.addACE("local", new ACE.ACEBuilder(WorkspaceGroup.Role.reader.getAclName(workspaceId),"Read").isGranted(true).build());
+        acp.addACE("local", new ACE.ACEBuilder(WorkspaceGroup.Role.writer.getAclName(workspaceId),"ReadWrite").isGranted(true).build());
+        acp.addACE("local", new ACE.ACEBuilder(WorkspaceGroup.Role.administrator.getAclName(workspaceId),"Everything").isGranted(true).build());
 
         session.setACP(workspace.getRef(), acp, true);
 

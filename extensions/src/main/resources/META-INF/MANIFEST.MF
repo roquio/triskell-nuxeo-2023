@@ -10,4 +10,8 @@ Nuxeo-Component: OSGI-INF/extensions/doctype-contrib.xml,
   OSGI-INF/extensions/businessid/directory-contrib.xml,
   OSGI-INF/extensions/paths/listener-contrib.xml,
   OSGI-INF/extensions/paths/path-segment-contrib.xml,
-  OSGI-INF/extensions/usermanagement/schema-contrib.xml,
+  OSGI-INF/extensions/membermanagement/schema-contrib.xml,
+  OSGI-INF/extensions/membermanagement/service-contrib.xml,
+  OSGI-INF/extensions/membermanagement/operation-contrib.xml,
+
+

@@ -1,7 +1,9 @@
-package io.roqu.workspaces.workspaces.operation;
+package io.roqu.workspaces.membermanagement.model;
 
 import lombok.Getter;
 import org.nuxeo.ecm.platform.usermanager.NuxeoGroupImpl;
+
+import static io.roqu.workspaces.membermanagement.WorkspaceMemberManagementConstants.*;
 
 /**
  * Implementation of workspace groups with role and reference to a workspace document
@@ -11,14 +13,15 @@ import org.nuxeo.ecm.platform.usermanager.NuxeoGroupImpl;
 @Getter
 public class WorkspaceGroup extends NuxeoGroupImpl  {
 
-    private final String GROUP_WORKSPACE_ID_FIELD = "workspaceId";
-    private final String GROUP_WORKSPACE_ROLE_FIELD = "workspaceRole";
-    private final String GROUP_WORKSPACE_GROUP_TYPE_FIELD = "workspaceGroupType";
 
     public enum Role {
         reader,
         writer,
-        administrator
+        administrator;
+
+        public String getAclName(String workspaceId) {
+            return workspaceId.concat("_").concat(this.name());
+        }
     }
 
     public enum GroupType {
@@ -41,20 +44,20 @@ public class WorkspaceGroup extends NuxeoGroupImpl  {
         this.workspaceId = workspaceId;
         this.groupType = GroupType.space_group;
 
-        model.setProperty(config.schemaName, GROUP_WORKSPACE_ID_FIELD, workspaceId);
-        model.setProperty(config.schemaName, GROUP_WORKSPACE_GROUP_TYPE_FIELD, groupType.name());
+        model.setProperty(config.schemaName, GROUP_WORKSPACE_ID, workspaceId);
+        model.setProperty(config.schemaName, GROUP_WORKSPACE_GROUP_TYPE, groupType.name());
     }
 
     public WorkspaceGroup(String workspaceId, Role role) {
 
-        super(workspaceId.concat("_").concat(role.name()));
+        super(role.getAclName(workspaceId));
         this.workspaceId = workspaceId;
         this.role = role;
         this.groupType = GroupType.security_group;
 
-        model.setProperty(config.schemaName, GROUP_WORKSPACE_ID_FIELD, workspaceId);
-        model.setProperty(config.schemaName, GROUP_WORKSPACE_GROUP_TYPE_FIELD, groupType.name());
-        model.setProperty(config.schemaName, GROUP_WORKSPACE_ROLE_FIELD, role.name());
+        model.setProperty(config.schemaName, GROUP_WORKSPACE_ID, workspaceId);
+        model.setProperty(config.schemaName, GROUP_WORKSPACE_GROUP_TYPE, groupType.name());
+        model.setProperty(config.schemaName, GROUP_ROLE, role.name());
 
     }
 

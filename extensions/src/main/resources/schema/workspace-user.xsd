@@ -27,9 +27,9 @@
   <xs:element name="tenantId" type="xs:string" />
 
   <!-- Custom fields -->
-  <xs:element name="creationDate" tyoe="xs:date" />
-  <xs:element name="lastConnection" tyoe="xs:date" />
-  <xs:element name="territoryCode" tyoe="xs:string" />
-  <xs:element name="rne" tyoe="xs:string" />
+  <xs:element name="creationDate" type="xs:date" />
+  <xs:element name="lastConnection" type="xs:date" />
+  <xs:element name="territoryCode" type="xs:string" />
+  <xs:element name="rne" type="xs:string" />
 
 </xs:schema>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<component name="io.roqu.workspaces.membermanagement.service" version="1.0">
+
+    <documentation>
+        Management of members of a workspace.
+    </documentation>
+    <implementation class="io.roqu.workspaces.membermanagement.service.WorkspaceMemberManagementServiceImpl" />
+    <service>
+        <provide interface="io.roqu.workspaces.membermanagement.service.WorkspaceMemberManagementService" />
+    </service>
+
+</component>

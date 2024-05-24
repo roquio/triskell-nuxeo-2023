@@ -22,8 +22,8 @@
   <xs:element name="tenantId" type="xs:string" />
 
   <!-- Custom fields -->
-  <xs:element name="workspaceId" tyoe="xs:string" />
-  <xs:element name="workspaceRole" tyoe="xs:string" />
-  <xs:element name="workspaceGroupType" tyoe="xs:string" />
+  <xs:element name="workspaceId" type="xs:string" />
+  <xs:element name="workspaceRole" type="xs:string" />
+  <xs:element name="workspaceGroupType" type="xs:string" />
 
 </xs:schema>

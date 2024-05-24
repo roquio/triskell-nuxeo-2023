@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<component name="io.roqu.workspaces.membermanagement.operations" version="1.0">
+    <require>org.nuxeo.ecm.core.operation.OperationServiceComponent</require>
+
+    <extension target="org.nuxeo.ecm.core.operation.OperationServiceComponent" point="operations">
+        <operation class="io.roqu.workspaces.membermanagement.operation.GetWorkspaceMembers" />
+
+    </extension>
+</component>

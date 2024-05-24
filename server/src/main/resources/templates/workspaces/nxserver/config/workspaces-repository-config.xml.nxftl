@@ -26,6 +26,7 @@
 				<include>*</include>
 				<exclude>ecm:binarytext</exclude>
 			</fetchFromSource>
+			<mapping file="customized-elasticsearch-doc-mapping.json" />
 		</elasticSearchIndex>
 	</extension>
 </component>

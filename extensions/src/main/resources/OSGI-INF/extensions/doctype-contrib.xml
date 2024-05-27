@@ -13,25 +13,28 @@
             <schema name="navigation"/>
         </facet>
 
-        <doctype name="Room">
+        <doctype name="Room" extends="Folder">
             <facet name="Navigable"/>
-            <subtypes>
-                <type>Folder</type>
-            </subtypes>
         </doctype>
 
-        <doctype name="WorkspaceStats">
+        <doctype name="WorkspaceStats" extends="Document">
+            <schema name="dublincore"/>
             <schema name="workspaceStats"/>
         </doctype>
 
-        <doctype name="Invitation">
+        <doctype name="Invitation" extends="Document">
+            <schema name="dublincore"/>
             <schema name="invitation"/>
         </doctype>
-        <doctype name="InvitationRequest">
+
+        <doctype name="InvitationRequest" extends="Document">
+            <schema name="dublincore"/>
             <schema name="invitation"/>
         </doctype>
 
         <doctype name="InvitationsFolder">
+            <schema name="dublincore"/>
+            <facet name="Folderish"/>
             <subtypes>
                 <type>Invitation</type>
                 <type>InvitationRequest</type>
@@ -62,15 +65,13 @@
     </extension>
 
 
-    <extension target="org.nuxeo.ecm.core.lifecycle.LifeCycleService"
-               point="types">
+    <extension target="org.nuxeo.ecm.core.lifecycle.LifeCycleService" point="types">
         <types>
             <type name="Room">default</type>
             <type name="WorkspaceStats">default</type>
             <type name="Invitation">default</type>
             <type name="InvitationRequest">default</type>
             <type name="InvitationsFolder">default</type>
-
         </types>
     </extension>
 

@@ -13,8 +13,9 @@
         </xs:list>
     </xs:simpleType>
 
+    <xs:element name="targetUserId" type="xs:string"/>
+    <xs:element name="targetUserMail" type="xs:string"/>
 
-    <xs:element name="initiator" type="xs:string"/>
     <xs:element name="localGroups" type="nxs:localGroupsList"/>
     <xs:element name="invitationResendingDate" type="xs:date"/>
     <xs:element name="state" type="xs:string"/>

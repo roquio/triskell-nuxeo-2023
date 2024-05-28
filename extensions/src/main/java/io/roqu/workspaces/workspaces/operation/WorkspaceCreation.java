@@ -73,6 +73,7 @@ public class WorkspaceCreation {
         acp.addACE("local", new ACE.ACEBuilder(WorkspaceGroup.Role.reader.getAclName(workspaceId),"Read").isGranted(true).build());
         acp.addACE("local", new ACE.ACEBuilder(WorkspaceGroup.Role.writer.getAclName(workspaceId),"ReadWrite").isGranted(true).build());
         acp.addACE("local", new ACE.ACEBuilder(WorkspaceGroup.Role.administrator.getAclName(workspaceId),"Everything").isGranted(true).build());
+        acp.addACE("local", new ACE.ACEBuilder("Everyone","Everything").isGranted(false).build());
 
         session.setACP(workspace.getRef(), acp, true);
 

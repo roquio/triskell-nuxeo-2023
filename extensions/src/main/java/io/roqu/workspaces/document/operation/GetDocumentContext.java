@@ -120,7 +120,9 @@ public class GetDocumentContext {
         // JSON object
         JSONObject jsonObject = new JSONObject();
         jsonObject.accumulate("repository", document.getRepositoryName());
-        jsonObject.accumulate("id", document.getPropertyValue(WorkspacesConstants.ID_FIELD));
+        if(document.hasSchema(WorkspacesConstants.NAVIGATION_SCHEMA)) {
+            jsonObject.accumulate("id", document.getPropertyValue(WorkspacesConstants.ID_FIELD));
+        }
         jsonObject.accumulate("path", document.getPathAsString());
         jsonObject.accumulate("uuid", document.getId());
         jsonObject.accumulate("type", document.getType());

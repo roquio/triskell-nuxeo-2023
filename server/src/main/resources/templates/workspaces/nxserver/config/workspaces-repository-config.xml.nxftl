@@ -26,6 +26,7 @@
 				<include>ecm:*</include>
 				<include>dc:*</include>
 				<include>nav:*</include>
+				<include>inv:*</include>
 				<exclude>ecm:binarytext</exclude>
 			</fetchFromSource>
 			<mapping file="customized-elasticsearch-doc-mapping.json" />

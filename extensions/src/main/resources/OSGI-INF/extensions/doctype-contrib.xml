@@ -13,21 +13,20 @@
             <schema name="navigation"/>
         </facet>
 
-        <doctype name="Room" extends="Folder">
+
+        <doctype name="Audio" append="true">
             <facet name="Navigable"/>
         </doctype>
 
-        <doctype name="WorkspaceStats" extends="Document">
-            <schema name="dublincore"/>
-            <schema name="workspaceStats"/>
+        <doctype name="File" append="true">
+            <facet name="Navigable"/>
+        </doctype>
+
+        <doctype name="Folder" append="true">
+            <facet name="Navigable"/>
         </doctype>
 
         <doctype name="Invitation" extends="Document">
-            <schema name="dublincore"/>
-            <schema name="invitation"/>
-        </doctype>
-
-        <doctype name="InvitationRequest" extends="Document">
             <schema name="dublincore"/>
             <schema name="invitation"/>
         </doctype>
@@ -41,6 +40,27 @@
             </subtypes>
         </doctype>
 
+        <doctype name="InvitationRequest" extends="Document">
+            <schema name="dublincore"/>
+            <schema name="invitation"/>
+        </doctype>
+
+        <doctype name="Note" append="true">
+            <facet name="Navigable"/>
+        </doctype>
+
+        <doctype name="Picture" append="true">
+            <facet name="Navigable"/>
+        </doctype>
+
+        <doctype name="Room" extends="Folder">
+            <facet name="Navigable"/>
+        </doctype>
+
+        <doctype name="Video" append="true">
+            <facet name="Navigable"/>
+        </doctype>
+
         <doctype name="Workspace" append="true">
             <facet name="Navigable"/>
             <schema name="workspace"/>
@@ -51,16 +71,9 @@
             </subtypes>
         </doctype>
 
-        <doctype name="Folder" append="true">
-            <facet name="Navigable"/>
-        </doctype>
-
-        <doctype name="File" append="true">
-            <facet name="Navigable"/>
-        </doctype>
-
-        <doctype name="Note" append="true">
-            <facet name="Navigable"/>
+        <doctype name="WorkspaceStats" extends="Document">
+            <schema name="dublincore"/>
+            <schema name="workspaceStats"/>
         </doctype>
     </extension>
 

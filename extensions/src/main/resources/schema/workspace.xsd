@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
-<xs:schema targetNamespace="http://www.roqu.io/worskpaces/schemas/workspace/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
+<xs:schema targetNamespace="http://www.roqu.io/worskpaces/schemas/workspace/"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="editorial" type="xs:string"/>
+    <xs:element name="invitationRequestAuthorized" type="xs:boolean"/>
     <xs:element name="visibility" type="xs:string"/>
-    <xs:element name="requestsEnabled" type="xs:boolean"/>
-    <xs:element name="edito" type="xs:string"/>
     <xs:element name="welcomeMessage" type="xs:string"/>
-
 </xs:schema>

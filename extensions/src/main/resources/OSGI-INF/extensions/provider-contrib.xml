@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<component name="io.roqu.workspaces.provider" version="1.0">
+    <require>org.nuxeo.ecm.platform.query.api.PageProviderService</require>
+
+    <extension target="org.nuxeo.ecm.platform.query.api.PageProviderService" point="providers">
+
+        <genericPageProvider name="ELASTIC_SEARCH_PAGE_PROVIDER"
+                             class="io.roqu.workspaces.elasticsearch.provider.ElasticSearchPageProvider"/>
+
+    </extension>
+
+</component>

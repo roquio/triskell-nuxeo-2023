@@ -23,10 +23,13 @@
 	<extension target="org.nuxeo.elasticsearch.ElasticSearchComponent" point="elasticSearchIndex">
 		<elasticSearchIndex name="${nuxeo.db.workspaces.repository}" type="doc" repository="${nuxeo.db.workspaces.repository}" manageAlias="false">
 			<fetchFromSource>
-				<include>ecm:*</include>
 				<include>dc:*</include>
-				<include>nav:*</include>
+				<include>ecm:*</include>
+				<include>file:*</include>
 				<include>inv:*</include>
+				<include>nav:*</include>
+				<include>thumb:*</include>
+
 				<exclude>ecm:binarytext</exclude>
 			</fetchFromSource>
 			<mapping file="customized-elasticsearch-doc-mapping.json" />

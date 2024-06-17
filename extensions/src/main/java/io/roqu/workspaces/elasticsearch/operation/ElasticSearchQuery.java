@@ -1,5 +1,6 @@
 package io.roqu.workspaces.elasticsearch.operation;
 
+import io.roqu.workspaces.elasticsearch.provider.ElasticSearchPageProvider;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.BooleanUtils;
@@ -19,8 +20,6 @@ import org.nuxeo.ecm.core.api.SortInfo;
 import org.nuxeo.ecm.platform.query.api.PageProvider;
 import org.nuxeo.ecm.platform.query.api.PageProviderDefinition;
 import org.nuxeo.ecm.platform.query.api.PageProviderService;
-import org.nuxeo.ecm.platform.query.nxql.CoreQueryDocumentPageProvider;
-import org.nuxeo.elasticsearch.provider.ElasticSearchNxqlPageProvider;
 import org.nuxeo.runtime.api.Framework;
 
 import java.io.Serializable;
@@ -44,11 +43,6 @@ public class ElasticSearchQuery {
     public static final String ID = "Repository.ElasticSearchQuery";
 
     /**
-     * Page provider name.
-     */
-    private static final String PAGE_PROVIDER_NAME = "REST_API_SEARCH_ADAPTER";
-
-    /**
      * Default page size.
      */
     private static final long DEFAULT_PAGE_SIZE = 50L;
@@ -69,7 +63,7 @@ public class ElasticSearchQuery {
      * Search on all repositories indicator.
      */
     @Param(name = "searchOnAllRepositories", description = "Search on all repositories indicator", required = false)
-    private Boolean searchOnAllRepositories;
+    protected Boolean searchOnAllRepositories;
 
     /**
      * Query.
@@ -81,37 +75,37 @@ public class ElasticSearchQuery {
      * Page size.
      */
     @Param(name = "pageSize", description = "Page size", required = false)
-    private Long pageSize;
+    protected Long pageSize;
 
     /**
      * Current page index.
      */
     @Param(name = "currentPageIndex", description = "Current page index", required = false)
-    private Long currentPageIndex;
+    protected Long currentPageIndex;
 
     /**
      * Max results.
      */
     @Param(name = "maxResults", description = "Max results; useful to avoid slowing down queries", required = false)
-    private Long maxResults;
+    protected Long maxResults;
 
     /**
      * Sort by.
      */
     @Param(name = "sortBy", description = "Sort by", required = false)
-    private String sortBy;
+    protected String sortBy;
 
     /**
      * Sort order.
      */
     @Param(name = "sortOrder", description = "Sort order", required = false)
-    private String sortOrder;
+    protected String sortOrder;
 
     /**
      * Query parameters.
      */
     @Param(name = "queryParams", description = "Query parameters", required = false)
-    private Object[] queryParams;
+    protected Object[] queryParams;
 
 
     /**
@@ -126,26 +120,26 @@ public class ElasticSearchQuery {
         PageProviderService pageProviderService = Framework.getService(PageProviderService.class);
 
         // Page provider definition
-        PageProviderDefinition pageProviderDefinition = pageProviderService.getPageProviderDefinition(PAGE_PROVIDER_NAME);
+        PageProviderDefinition pageProviderDefinition = pageProviderService.getPageProviderDefinition(ElasticSearchPageProvider.NAME);
         pageProviderDefinition.setPattern(this.query);
         if (this.maxResults == null) {
-            pageProviderDefinition.getProperties().put("maxResults", String.valueOf(DEFAULT_MAX_RESULTS));
+            pageProviderDefinition.getProperties().put(ElasticSearchPageProvider.MAX_RESULTS_PROPERTY, String.valueOf(DEFAULT_MAX_RESULTS));
         } else if (this.maxResults > 0) {
-            pageProviderDefinition.getProperties().put("maxResults", String.valueOf(this.maxResults));
+            pageProviderDefinition.getProperties().put(ElasticSearchPageProvider.MAX_RESULTS_PROPERTY, String.valueOf(this.maxResults));
         }
 
         // Page provider properties
         Map<String, Serializable> properties = new HashMap<>();
-        properties.put(CoreQueryDocumentPageProvider.CORE_SESSION_PROPERTY, (Serializable) this.session);
+        properties.put(ElasticSearchPageProvider.CORE_SESSION_PROPERTY, (Serializable) this.session);
         if (BooleanUtils.toBoolean(this.searchOnAllRepositories)) {
-            properties.put(ElasticSearchNxqlPageProvider.SEARCH_ON_ALL_REPOSITORIES_PROPERTY, String.valueOf(true));
+            properties.put(ElasticSearchPageProvider.SEARCH_ON_ALL_REPOSITORIES_PROPERTY, String.valueOf(true));
         }
 
         // Page provider
         List<SortInfo> sortInfos = this.getSortInfos();
         long pageSize = ObjectUtils.defaultIfNull(this.pageSize, DEFAULT_PAGE_SIZE);
         long currentPageIndex = ObjectUtils.defaultIfNull(this.currentPageIndex, 0L);
-        PageProvider<DocumentModel> pageProvider = (PageProvider<DocumentModel>) pageProviderService.getPageProvider(PAGE_PROVIDER_NAME, pageProviderDefinition, null, sortInfos, pageSize, currentPageIndex, properties, this.queryParams);
+        PageProvider<DocumentModel> pageProvider = (PageProvider<DocumentModel>) pageProviderService.getPageProvider(ElasticSearchPageProvider.NAME, pageProviderDefinition, null, sortInfos, pageSize, currentPageIndex, properties, this.queryParams);
 
         return CoreInstance.doPrivileged(this.session, session -> {
             return new PaginableDocumentModelListImpl(pageProvider);

@@ -3,8 +3,9 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Roquio workspaces Nuxeo extensions
 Bundle-SymbolicName: io.roqu.workspaces.nuxeo.extensions;singleton:=true
 Nuxeo-Component: OSGI-INF/extensions/doctype-contrib.xml,
-  OSGI-INF/extensions/schema-contrib.xml,
   OSGI-INF/extensions/operation-contrib.xml,
+  OSGI-INF/extensions/provider-contrib.xml,
+  OSGI-INF/extensions/schema-contrib.xml,
   OSGI-INF/extensions/businessid/listener-contrib.xml,
   OSGI-INF/extensions/businessid/directory-contrib.xml,
   OSGI-INF/extensions/paths/listener-contrib.xml,

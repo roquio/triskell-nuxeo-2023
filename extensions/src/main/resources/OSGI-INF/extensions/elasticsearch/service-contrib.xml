@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<component name="io.roqu.workspaces.elasticsearch.service" version="1.0">
+    <require>org.nuxeo.elasticsearch.ElasticSearchComponent</require>
+
+    <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent" point="elasticSearchDocWriter">
+        <writer class="io.roqu.workspaces.elasticsearch.registry.CustomizedJsonElasticSearchDocumentWriter"/>
+    </extension>
+</component>

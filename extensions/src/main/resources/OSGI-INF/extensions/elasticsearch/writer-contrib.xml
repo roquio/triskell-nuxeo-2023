@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<component name="io.roqu.workspaces.elasticsearch.writer" version="1.0">
+    <require>io.roqu.workspaces.elasticsearch.registry</require>
+
+    <extension target="io.roqu.workspaces.elasticsearch.registry" point="writer">
+        <writer class="io.roqu.workspaces.elasticsearch.writer.DefaultElasticSearchDocumentWriter"/>
+    </extension>
+</component>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<component name="io.roqu.workspaces.elasticsearch.registry" version="1.0">
+    <implementation class="io.roqu.workspaces.elasticsearch.registry.ElasticSearchRegistryImpl"/>
+
+    <service>
+        <provide interface="io.roqu.workspaces.elasticsearch.registry.ElasticSearchRegistry"/>
+    </service>
+
+    <extension-point name="writer">
+        <object class="io.roqu.workspaces.elasticsearch.registry.ElasticSearchDocumentWriterDescriptor"/>
+    </extension-point>
+</component>

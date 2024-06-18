@@ -1,12 +1,8 @@
 <?xml version="1.0"?>
-<component name="io.roqu.workspaces.elasticsearch.registry" version="1.0">
-    <implementation class="io.roqu.workspaces.elasticsearch.registry.ElasticSearchRegistryImpl"/>
+<component name="io.roqu.workspaces.elasticsearch.registry.contrib" version="1.0">
+    <require>io.roqu.workspaces.elasticsearch.registry</require>
 
-    <service>
-        <provide interface="io.roqu.workspaces.elasticsearch.registry.ElasticSearchRegistry"/>
-    </service>
-
-    <extension-point name="writer">
-        <object class="io.roqu.workspaces.elasticsearch.registry.ElasticSearchDocumentWriterDescriptor"/>
-    </extension-point>
+    <extension target="io.roqu.workspaces.elasticsearch.registry" point="writer">
+        <writer class="io.roqu.workspaces.elasticsearch.writer.DefaultElasticSearchDocumentWriter"/>
+    </extension>
 </component>

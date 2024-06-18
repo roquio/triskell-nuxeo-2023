@@ -1,13 +1,13 @@
 package io.roqu.workspaces.document.operation.runner;
 
 import io.roqu.workspaces.WorkspacesConstants;
+import io.roqu.workspaces.elasticsearch.service.CustomizedElasticSearchService;
 import lombok.Getter;
 import org.apache.commons.lang3.ArrayUtils;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentModelList;
 import org.nuxeo.ecm.core.api.UnrestrictedSessionRunner;
-import org.nuxeo.elasticsearch.api.ElasticSearchService;
 import org.nuxeo.elasticsearch.api.EsResult;
 import org.nuxeo.elasticsearch.query.NxQueryBuilder;
 import org.nuxeo.runtime.api.Framework;
@@ -68,7 +68,7 @@ public class GetDocumentByIdUnrestrictedSessionRunner extends UnrestrictedSessio
 
     @Override
     public void run() {
-        ElasticSearchService service = Framework.getService(ElasticSearchService.class);
+        CustomizedElasticSearchService service = Framework.getService(CustomizedElasticSearchService.class);
 
         // Query
         String query = String.format(QUERY, this.id);

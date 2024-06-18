@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<component name="io.roqu.workspaces.elasticsearch.service" version="1.0">
+    <require>org.nuxeo.elasticsearch.ElasticSearchComponent</require>
+
+    <implementation class="io.roqu.workspaces.elasticsearch.service.CustomizedElasticSearchServiceImpl"/>
+
+    <service>
+        <provide interface="io.roqu.workspaces.elasticsearch.service.CustomizedElasticSearchService"/>
+    </service>
+</component>

@@ -109,7 +109,8 @@
         },
         "lowercase" : {
           "analyzer" : "lowercase_analyzer",
-          "type": "text"
+          "type": "text",
+          "fielddata": true
         }
       }
     },
@@ -178,6 +179,12 @@
           "type": "text"
         }
       }
+    },
+    "nav:folder": {
+      "type": "boolean"
+    },
+    "nav:id": {
+      "type": "keyword"
     }
   }
 }
